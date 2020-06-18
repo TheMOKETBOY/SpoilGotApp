@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="spoilgot:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>spoilgot</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="spoilgot-samuel_tatelvilrus.war">
+      <element id="artifact" artifact-name="spoilgot:war exploded" />
+    </root>
+  </artifact>
+</component>
