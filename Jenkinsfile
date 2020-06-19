@@ -1,16 +1,22 @@
+  
 pipeline {
    agent any
 
    tools {
-      // Install the Maven version configured as "M3" and add it to the path.
+      // Install the Maven version configured as "maven" and add it to the path.
       maven "maven"
    }
 
    stages {
+      stage('Ready') {
+         steps {
+            input 'Let\'s go?'
+         }
+      }
       stage('Build') {
          steps {
             // Get some code from a GitHub repository
-            git 'https://github.com/francois-dorval/SpoilGotApp.git'
+            git 'https://github.com/SoleneBDev/SpoilGotApp.git'
 
             // Run Maven on a Unix agent.
             sh "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -26,6 +32,30 @@ pipeline {
                junit '**/target/surefire-reports/TEST-*.xml'
                archiveArtifacts 'target/*.war'
             }
+         }
+      }
+      stage('S3') {
+         steps {
+            s3Upload consoleLogLevel: 'INFO',
+                     dontSetBuildResultOnFailure: false,
+                     dontWaitForConcurrentBuildCompletion: false,
+                     entries: [[
+                        bucket: 'boc-ic-bucket',
+                        excludedFile: '',
+                        flatten: false,
+                        gzipFiles: false,
+                        keepForever: false,
+                        managedArtifacts: false,
+                        noUploadOnFailure: false,
+                        selectedRegion: 'eu-west-2',
+                        showDirectlyInBrowser: false,
+                        sourceFile: 'date.txt',
+                        storageClass: 'STANDARD',
+                        uploadFromSlave: false,
+                        useServerSideEncryption: false]],
+                     pluginFailureResultConstraint: 'FAILURE',
+                     profileName: 'boc-profile',
+                     userMetadata: []
          }
       }
    }
