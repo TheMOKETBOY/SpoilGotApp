@@ -114,6 +114,22 @@ public class BusinessUnitTest {
     @Test
     //TODO
     public void testSaison6Erreur500() {
+        List<GotCharacterBack> result = new ArrayList<>();
+        result.add(new GotCharacterBack(1, "Ramsay Bolton", Season.S6, null));
+        result.add(new GotCharacterBack(2, "Johnny Lannister"));
+        try {
+
+            Mockito.when(fireBaseDao.getCharacters()).thenReturn(result);
+            //On verifie qu'on ai tous les personnages
+            List<GotCharacterFront> charactersS6 = spoilBusiness.getCharactersInSeason(Season.S6);
+            Assert.assertEquals(charactersS6.size(), 2);
+            Assert.assertEquals(charactersS6.get(0).getName(), "Ramsay Bolton");
+
+
+        } catch (Exception e) {
+            Assert.fail();
+            e.printStackTrace();
+        }
 
     }
 

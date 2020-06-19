@@ -67,6 +67,7 @@ public class SpoilBusiness {
     }
 
 
+
     /**
      * true si le personnage se fait tuer PENDANT la saison en cours
      *
@@ -118,12 +119,19 @@ public class SpoilBusiness {
 
         //cause de la mort
         if (deadInSeason) {
-            result.setCauseOfDeath("killed by " + findCharacteByID(gotCharacterBack.getKilledby()).getName());
+            if (deadInSeason) {
+                if(gotCharacterBack.getKilledby() !=null){
+                    result.setCauseOfDeath("killed by " + findCharacteByID(gotCharacterBack.getKilledby()).getName());
+                }
+                else{
+                    result.setCauseOfDeath("killed by himself");
+                }
+            }
+
         }
         return result;
 
 
     }
-
 
 }
