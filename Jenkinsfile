@@ -34,7 +34,7 @@ pipeline {
             }
          }
       }
-      stage('Season') {
+      stage('S3') {
          steps {
             s3Upload consoleLogLevel: 'INFO',
                      dontSetBuildResultOnFailure: false,
