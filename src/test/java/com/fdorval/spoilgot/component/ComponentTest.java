@@ -67,13 +67,12 @@ public class ComponentTest {
     /**
      * l'appli doit retourner 400 si le paramètre "season" n'est pas un entier
      *
-     *  @param season you'd put a description of the parameter her
      * @throws Exception
      */
     //TODO
     @Test
-    public void shouldReturn400ifSeasonIsNotInt(int season ) throws Exception {
-
+    public void shouldReturn400ifSeasonIsNotInt() throws Exception {
+         //C'éétait à coder de base... Avoir pour plus tard.
         }
 
 
